@@ -58,19 +58,19 @@ button {
     transition: background-color 0.3s, transform 0.3s; /* Ajouter des transitions pour un effet visuel */
 }
 
-button:nth-child(1) {
+button:nth-of-type(1) {
     background-color: #6c757d; /* Couleur douce pour le premier bouton */
 }
 
-button:nth-child(2) {
+button:nth-of-type(2) {
     background-color: #17a2b8; /* Couleur douce pour le deuxième bouton */
 }
 
-button:nth-child(3) {
+button:nth-of-type(3) {
     background-color: #ffc107; /* Couleur douce pour le troisième bouton */
 }
 
-button:nth-child(4) {
+button:nth-of-type(4) {
     background-color: #28a745; /* Couleur douce pour le quatrième bouton */
 }
 

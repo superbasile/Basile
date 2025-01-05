@@ -37,12 +37,20 @@
         <button onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4')">B.O.U.F.F.O.N.</button>
     </main>
     <script>
+        // Fonction pour changer la chanson
         function changerChanson(titre, chemin) {
+            const videoPlayer = document.getElementById('videoPlayer');
             document.getElementById('songTitle').innerText = titre;
-            document.getElementById('videoPlayer').src = chemin;
-            document.getElementById('videoPlayer').load();
-            document.getElementById('videoPlayer').play();
+            videoPlayer.src = chemin;
+            videoPlayer.load();
+            videoPlayer.play();
         }
+
+        // Définir le volume initial à 50%
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.volume = 0.5;
+        });
     </script>
 </body>
 </html>

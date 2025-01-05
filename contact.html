@@ -20,11 +20,12 @@
         <h1>Contact</h1>
         <img id="contactImage" src="images/contact.jpg" alt="Image de contact" width="300">
         <br><br>
-        <button onclick="mettreContact()">Mettre le contact ?</button>
+        <button id="contactButton" onclick="mettreContact()">Mettre le contact ?</button>
     </main>
     <script>
         function mettreContact() {
             document.getElementById('contactImage').src = 'images/contact2.jpg';
+            document.getElementById('contactButton').style.display = 'none';
         }
     </script>
 </body>

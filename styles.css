@@ -38,14 +38,15 @@ main {
 
 h1, h2 {
     color: #333;
+    font-family: 'Georgia', serif; /* Changer la police des titres */
 }
 
 p {
     color: #666;
+    font-family: 'Verdana', sans-serif; /* Changer la police du texte */
 }
 
 button {
-    background-color: #4CAF50; /* Couleur de fond */
     color: white; /* Couleur du texte */
     border: none;
     padding: 20px 40px; /* Augmenter la taille des boutons */
@@ -57,8 +58,23 @@ button {
     transition: background-color 0.3s, transform 0.3s; /* Ajouter des transitions pour un effet visuel */
 }
 
+button:nth-child(1) {
+    background-color: #6c757d; /* Couleur douce pour le premier bouton */
+}
+
+button:nth-child(2) {
+    background-color: #17a2b8; /* Couleur douce pour le deuxième bouton */
+}
+
+button:nth-child(3) {
+    background-color: #ffc107; /* Couleur douce pour le troisième bouton */
+}
+
+button:nth-child(4) {
+    background-color: #28a745; /* Couleur douce pour le quatrième bouton */
+}
+
 button:hover {
-    background-color: #45a049; /* Couleur de fond au survol */
     transform: scale(1.05); /* Agrandir légèrement le bouton au survol */
 }
 

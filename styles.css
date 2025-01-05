@@ -47,34 +47,21 @@ p {
 }
 
 button {
+    background-color: #0078d4; /* Couleur de fond */
     color: white; /* Couleur du texte */
     border: none;
-    padding: 20px 40px; /* Augmenter la taille des boutons */
-    font-size: 18px; /* Augmenter la taille de la police */
+    padding: 15px 30px; /* Taille des boutons */
+    font-size: 16px; /* Taille de la police */
     cursor: pointer;
-    margin: 10px; /* Ajouter de l'espace entre les boutons */
-    border-radius: 10px; /* Arrondir les coins */
+    margin: 10px; /* Espace entre les boutons */
+    border-radius: 5px; /* Coins légèrement arrondis */
     font-family: 'Arial', sans-serif;
-    transition: background-color 0.3s, transform 0.3s; /* Ajouter des transitions pour un effet visuel */
-}
-
-button:nth-of-type(1) {
-    background-color: #6c757d; /* Couleur douce pour le premier bouton */
-}
-
-button:nth-of-type(2) {
-    background-color: #17a2b8; /* Couleur douce pour le deuxième bouton */
-}
-
-button:nth-of-type(3) {
-    background-color: #ffc107; /* Couleur douce pour le troisième bouton */
-}
-
-button:nth-of-type(4) {
-    background-color: #28a745; /* Couleur douce pour le quatrième bouton */
+    transition: background-color 0.3s, transform 0.3s; /* Transitions pour un effet visuel */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de profondeur */
 }
 
 button:hover {
+    background-color: #005a9e; /* Couleur de fond au survol */
     transform: scale(1.05); /* Agrandir légèrement le bouton au survol */
 }
 

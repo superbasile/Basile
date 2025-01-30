@@ -22,19 +22,23 @@
 
         <!-- Conteneur pour la chanson -->
         <div id="player">
-            <h2 id="songTitle">Beethoven</h2>
+            <h2 id="songTitle">L'Amalaria</h2>
             <video id="videoPlayer" width="640" height="480" controls>
-                <source src="sons/Beethoven.mp4" type="video/mp4">
+                <source src="sons/L'Amalaria.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la balise vidéo.
             </video>
         </div>
         <br><br>
 
-        <!-- Boutons pour sélectionner les chansons -->
-        <button onclick="changerChanson('Beethoven', 'sons/Beethoven.mp4')">Beethoven</button>
-        <button onclick="changerChanson('Ego sum', 'sons/Ego sum.mp4')">Ego sum</button>
-        <button onclick="changerChanson('Braqueurs', 'sons/Braqueurs.mp4')">Braqueurs</button>
-        <button onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4')">B.O.U.F.F.O.N.</button>
+        <!-- Boutons pour sélectionner les chansons avec attributs data -->
+        <button data-available="2025-01-31T01:10" onclick="changerChanson('L\'Amalaria', 'sons/L\'Amalaria.mp4')">L'Amalaria</button>
+        <button data-available="2025-02-03T20:00" onclick="changerChanson('Annie dingo', 'sons/Annie dingo.mp4')">Annie dingo</button>
+        <button data-available="2025-02-05T20:00" onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4')">B.O.U.F.F.O.N.</button>
+        <button data-available="2025-02-08T20:00" onclick="changerChanson('Braqueurs', 'sons/Braqueurs.mp4')">Braqueurs</button>
+        <button data-available="2025-02-10T20:00" onclick="changerChanson('Beethoven', 'sons/Beethoven.mp4')">Beethoven</button>
+        <button data-available="2025-02-12T20:00" onclick="changerChanson('Genghis Khan', 'sons/Genghis Khan.mp4')">Genghis Khan</button>
+        <button data-available="2025-02-15T20:00" onclick="changerChanson('Caleçon', 'sons/Caleçon.mp4')">Caleçon</button>
+        <button data-available="2025-02-17T20:00" onclick="changerChanson('Ego sum', 'sons/Ego sum.mp4')">Ego sum</button>
     </main>
     <script>
         // Fonction pour changer la chanson
@@ -50,6 +54,21 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.volume = 0.5;
+
+            // Vérifier la date et l'heure actuelles
+            const now = new Date();
+
+            // Parcourir les boutons et les afficher ou masquer en fonction des attributs data
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                const availableDate = new Date(button.getAttribute('data-available'));
+
+                if (now >= availableDate) {
+                    button.style.display = 'inline-block';
+                } else {
+                    button.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>

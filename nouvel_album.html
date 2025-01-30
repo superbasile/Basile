@@ -31,14 +31,14 @@
         <br><br>
 
         <!-- Boutons pour sélectionner les chansons avec attributs data -->
-        <button data-available="2025-01-31T01:10" onclick="changerChanson('L\'Amalaria', 'sons/L\'Amalaria.mp4')">L'Amalaria</button>
-        <button data-available="2025-02-03T20:00" onclick="changerChanson('Annie dingo', 'sons/Annie dingo.mp4')">Annie dingo</button>
-        <button data-available="2025-02-05T20:00" onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4')">B.O.U.F.F.O.N.</button>
-        <button data-available="2025-02-08T20:00" onclick="changerChanson('Braqueurs', 'sons/Braqueurs.mp4')">Braqueurs</button>
-        <button data-available="2025-02-10T20:00" onclick="changerChanson('Beethoven', 'sons/Beethoven.mp4')">Beethoven</button>
-        <button data-available="2025-02-12T20:00" onclick="changerChanson('Genghis Khan', 'sons/Genghis Khan.mp4')">Genghis Khan</button>
-        <button data-available="2025-02-15T20:00" onclick="changerChanson('Caleçon', 'sons/Caleçon.mp4')">Caleçon</button>
-        <button data-available="2025-02-17T20:00" onclick="changerChanson('Ego sum', 'sons/Ego sum.mp4')">Ego sum</button>
+        <button data-available="2025-01-31T01:10" onclick="changerChanson('L\'Amalaria', 'sons/L\'Amalaria.mp4')">L'Amalaria - Disponible le 31 janvier à 01:10</button>
+        <button data-available="2025-02-03T20:00" onclick="changerChanson('Annie dingo', 'sons/Annie dingo.mp4')">Annie dingo - Disponible le 3 février à 20:00</button>
+        <button data-available="2025-02-05T20:00" onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4')">B.O.U.F.F.O.N. - Disponible le 5 février à 20:00</button>
+        <button data-available="2025-02-08T20:00" onclick="changerChanson('Braqueurs', 'sons/Braqueurs.mp4')">Braqueurs - Disponible le 8 février à 20:00</button>
+        <button data-available="2025-02-10T20:00" onclick="changerChanson('Beethoven', 'sons/Beethoven.mp4')">Beethoven - Disponible le 10 février à 20:00</button>
+        <button data-available="2025-02-12T20:00" onclick="changerChanson('Genghis Khan', 'sons/Genghis Khan.mp4')">Genghis Khan - Disponible le 12 février à 20:00</button>
+        <button data-available="2025-02-15T20:00" onclick="changerChanson('Caleçon', 'sons/Caleçon.mp4')">Caleçon - Disponible le 15 février à 20:00</button>
+        <button data-available="2025-02-17T20:00" onclick="changerChanson('Ego sum', 'sons/Ego sum.mp4')">Ego sum - Disponible le 17 février à 20:00</button>
     </main>
     <script>
         // Fonction pour changer la chanson
@@ -64,9 +64,10 @@
                 const availableDate = new Date(button.getAttribute('data-available'));
 
                 if (now >= availableDate) {
-                    button.style.display = 'inline-block';
+                    button.disabled = false;
+                    button.innerText = button.innerText.split(' - ')[0]; // Enlever la date de sortie
                 } else {
-                    button.style.display = 'none';
+                    button.disabled = true;
                 }
             });
         });

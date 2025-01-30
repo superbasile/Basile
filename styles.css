@@ -60,6 +60,15 @@ button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de profondeur */
 }
 
+button:disabled {
+    background-color: #cccccc; /* Couleur de fond pour les boutons désactivés */
+    cursor: not-allowed; /* Changer le curseur pour les boutons désactivés */
+}
+
+button:hover:disabled {
+    transform: none; /* Désactiver l'effet de survol pour les boutons désactivés */
+}
+
 button:hover {
     background-color: #005a9e; /* Couleur de fond au survol */
     transform: scale(1.05); /* Agrandir légèrement le bouton au survol */

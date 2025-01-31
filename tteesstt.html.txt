@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvel album : Feur</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="nouvel_album.html">Nouvel Album</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Nouvel album : Feur</h1>
+        <p>Voici les chansons du nouvel album : Feur</p>
+
+        <!-- Conteneur pour la chanson -->
+        <div id="player" style="display: none;">
+            <h2 id="songTitle">L'Amalaria</h2>
+            <video id="videoPlayer" width="640" height="480" controls>
+                <source src="sons/L'Amalaria.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la balise vidéo.
+            </video>
+        </div>
+        <br><br>
+
+        <!-- Boutons pour sélectionner les chansons avec attributs data -->
+        <button data-available="2025-02-02T20:00" onclick="changerChanson('L\'Amalaria', 'sons/L\'Amalaria.mp4')">L'Amalaria - Disponible le 2 février à 20:00</button>
+        <button data-available="2025-02-03T20:00" onclick="changerChanson('Annie dingo', 'sons/Annie dingo.mp4')">Annie dingo - Disponible le 3 février à 20:00</button>
+        <button data-available="2025-02-05T20:00" onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4')">B.O.U.F.F.O.N. - Disponible le 5 février à 20:00</button>
+        <button data-available="2025-02-08T20:00" onclick="changerChanson('Braqueurs', 'sons/Braqueurs.mp4')">Braqueurs - Disponible le 8 février à 20:00</button>
+        <button data-available="2025-02-10T20:00" onclick="changerChanson('Beethoven', 'sons/Beethoven.mp4')">Beethoven - Disponible le 10 février à 20:00</button>
+        <button data-available="2025-02-12T20:00" onclick="changerChanson('Genghis Khan', 'sons/Genghis Khan.mp4')">Genghis Khan - Disponible le 12 février à 20:00</button>
+        <button data-available="2025-02-15T20:00" onclick="changerChanson('Caleçon', 'sons/Caleçon.mp4')">Caleçon - Disponible le 15 février à 20:00</button>
+        <button data-available="2025-02-17T20:00" onclick="changerChanson('Ego sum', 'sons/Ego sum.mp4')">Ego sum - Disponible le 17 février à 20:00</button>
+    </main>
+    <script>
+        // Fonction pour changer la chanson
+        function changerChanson(titre, chemin) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            document.getElementById('songTitle').innerText = titre;
+            videoPlayer.src = chemin;
+            videoPlayer.load();
+            videoPlayer.play();
+        }
+
+        // Définir le volume initial à 50%
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.volume = 0.5;
+
+            // Vérifier la date et l'heure actuelles
+            const now = new Date();
+
+            // Parcourir les boutons et les afficher ou masquer en fonction des attributs data
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                const availableDate = new Date(button.getAttribute('data-available'));
+
+                if (now >= availableDate) {
+                    button.disabled = false;
+                    button.innerText = button.innerText.split(' - ')[0]; // Enlever la date de sortie
+                } else {
+                    button.disabled = true;
+                }
+            });
+
+            // Afficher le lecteur vidéo si la première chanson est disponible
+            const firstButton = document.querySelector('button[data-available]');
+            const firstAvailableDate = new Date(firstButton.getAttribute('data-available'));
+            if (now >= firstAvailableDate) {
+                document.getElementById('player').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

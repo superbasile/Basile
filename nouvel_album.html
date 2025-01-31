@@ -21,7 +21,7 @@
         <p>Voici les chansons du nouvel album.</p>
 
         <!-- Conteneur pour la chanson -->
-        <div id="player">
+        <div id="player" style="display: none;">
             <h2 id="songTitle">L'Amalaria</h2>
             <video id="videoPlayer" width="640" height="480" controls>
                 <source src="sons/L'Amalaria.mp4" type="video/mp4">
@@ -70,6 +70,13 @@
                     button.disabled = true;
                 }
             });
+
+            // Afficher le lecteur vidéo si la première chanson est disponible
+            const firstButton = document.querySelector('button[data-available]');
+            const firstAvailableDate = new Date(firstButton.getAttribute('data-available'));
+            if (now >= firstAvailableDate) {
+                document.getElementById('player').style.display = 'block';
+            }
         });
     </script>
 </body>

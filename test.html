@@ -44,6 +44,7 @@
         <section id="comments">
             <h2>Commentaires</h2>
             <form id="commentForm">
+                <input type="text" id="commentName" placeholder="Votre nom" required>
                 <textarea id="commentText" placeholder="Écrire un commentaire..." required></textarea>
                 <button type="submit">Envoyer</button>
             </form>
@@ -95,33 +96,35 @@
                 document.getElementById('player').style.display = 'block';
             }
 
-            // Charger les commentaires depuis le stockage local
-            loadComments();
+            // Charger les commentaires depuis le fichier JSON
+            fetch('comments.json')
+                .then(response => response.json())
+                .then(comments => {
+                    const commentList = document.getElementById('commentList');
+                    commentList.innerHTML = '';
+                    comments.forEach(comment => {
+                        const commentElement = document.createElement('div');
+                        commentElement.className = 'comment';
+                        commentElement.innerHTML = `<strong>${comment.user}:</strong> ${comment.comment}`;
+                        commentList.appendChild(commentElement);
+                    });
+                });
         });
-
-        // Fonction pour charger les commentaires depuis le stockage local
-        function loadComments() {
-            const commentList = document.getElementById('commentList');
-            const comments = JSON.parse(localStorage.getItem('comments')) || [];
-            commentList.innerHTML = '';
-            comments.forEach(comment => {
-                const commentElement = document.createElement('div');
-                commentElement.className = 'comment';
-                commentElement.innerText = comment;
-                commentList.appendChild(commentElement);
-            });
-        }
 
         // Fonction pour ajouter un commentaire
         document.getElementById('commentForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            const commentName = document.getElementById('commentName').value;
             const commentText = document.getElementById('commentText').value;
-            const comments = JSON.parse(localStorage.getItem('comments')) || [];
-            comments.push(commentText);
-            localStorage.setItem('comments', JSON.stringify(comments));
-            document.getElementById('commentText').value = '';
-            loadComments();
-        });
-    </script>
-</body>
-</html>
+
+            // Créer une nouvelle issue sur GitHub pour déclencher l'action
+            fetch('https://api.github.com/repos/ton-utilisateur/ton-depot/issues', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'token VOTRE_TOKEN_PERSONNEL',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    title: `Nouveau commentaire de ${commentName}`,
+                    body: commentText
+                })

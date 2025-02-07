@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvel album : Le trône de Feur</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="nouvel_album.html">Nouvel Album : Le trône de Feur</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Nouvel album : Le trône de Feur</h1>
+        <p>Voici les chansons du nouvel album : Le trône de Feur.</p>
+
+        <!-- Conteneur pour la chanson -->
+        <div id="player" style="display: none;">
+            <h2 id="songTitle">L'Amalaria</h2>
+            <video id="videoPlayer" width="640" height="480" controls>
+                <source src="sons/L'Amalaria.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la balise vidéo.
+            </video>
+        </div>
+        <br><br>
+
+        <!-- Boutons pour sélectionner les chansons avec attributs data -->
+        <button data-available="2025-02-02T20:00" onclick="changerChanson('L\'Amalaria', 'sons/L\'Amalaria.mp4', this)">L'Amalaria - Disponible le 2 février à 20:00</button>
+        <button data-available="2025-02-03T20:00" onclick="changerChanson('Annie dingo', 'sons/Annie dingo.mp4', this)">Annie dingo - Disponible le 3 février à 20:00</button>
+        <button data-available="2025-02-04T20:00" onclick="changerChanson('B.O.U.F.F.O.N.', 'sons/B.O.U.F.F.O.N..mp4', this)">B.O.U.F.F.O.N. (Ft. Bob le tavernier) - Disponible le 4 février à 20:00</button>
+        <button data-available="2025-02-05T20:00" onclick="changerChanson('Braqueurs', 'sons/Braqueurs.mp4', this)">Braqueurs (Ft. Schnoupelischnifikeu) - Disponible le 5 février à 20:00</button>
+        <button data-available="2025-02-06T20:00" onclick="changerChanson('Beethoven', 'sons/Beethoven.mp4', this)">Beethoven (Ft. Mozart) - Disponible le 6 février à 20:00</button>
+        <button data-available="2025-02-07T20:00" onclick="changerChanson('Genghis Khan', 'sons/Genghis Khan.mp4', this)">Genghis Khan (Ft. Genghis Khan) - Disponible le 7 février à 20:00</button>
+        <button data-available="2025-02-08T20:00" onclick="changerChanson('Caleçon', 'sons/Caleçon.mp4', this)">Caleçon - Disponible le 8 février à 20:00</button>
+        <button data-available="2025-02-09T20:00" onclick="changerChanson('Ego sum', 'sons/Ego sum.mp4', this)">Ego sum - Disponible le 9 février à 20:00</button>
+
+        <!-- Espace commentaire -->
+        <section id="comments">
+            <h2>Commentaires</h2>
+            <form id="commentForm">
+                <textarea id="commentText" placeholder="Écrire un commentaire..." required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+            <div id="commentList"></div>
+        </section>
+    </main>
+    <script>
+        // Fonction pour changer la chanson
+        function changerChanson(titre, chemin, button) {
+            const now = new Date();
+            const availableDate = new Date(button.getAttribute('data-available'));
+
+            if (now >= availableDate) {
+                const videoPlayer = document.getElementById('videoPlayer');
+                document.getElementById('songTitle').innerText = titre;
+                videoPlayer.src = chemin;
+                videoPlayer.load();
+                videoPlayer.play();
+            } else {
+                alert("Cette chanson n'est pas encore disponible.");
+            }
+        }
+
+        // Définir le volume initial à 50%
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.volume = 0.5;
+
+            // Vérifier la date et l'heure actuelles
+            const now = new Date();
+
+            // Parcourir les boutons et les afficher ou masquer en fonction des attributs data
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                const availableDate = new Date(button.getAttribute('data-available'));
+
+                if (now >= availableDate) {
+                    button.disabled = false;
+                    button.innerText = button.innerText.split(' - ')[0]; // Enlever la date de sortie
+                } else {
+                    button.disabled = true;
+                }
+            });
+
+            // Afficher le lecteur vidéo si la première chanson est disponible
+            const firstButton = document.querySelector('button[data-available]');
+            const firstAvailableDate = new Date(firstButton.getAttribute('data-available'));
+            if (now >= firstAvailableDate) {
+                document.getElementById('player').style.display = 'block';
+            }
+
+            // Charger les commentaires depuis le stockage local
+            loadComments();
+        });
+
+        // Fonction pour charger les commentaires depuis le stockage local
+        function loadComments() {
+            const commentList = document.getElementById('commentList');
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            commentList.innerHTML = '';
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerText = comment;
+                commentList.appendChild(commentElement);
+            });
+        }
+
+        // Fonction pour ajouter un commentaire
+        document.getElementById('commentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const commentText = document.getElementById('commentText').value;
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            comments.push(commentText);
+            localStorage.setItem('comments', JSON.stringify(comments));
+            document.getElementById('commentText').value = '';
+            loadComments();
+        });
+    </script>
+</body>
+</html>

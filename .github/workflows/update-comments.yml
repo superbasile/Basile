@@ -1,0 +1,28 @@
+name: Update Comments
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened]
+
+jobs:
+  update-comments:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Update comments.json
+      run: |
+        echo "Updating comments.json"
+        COMMENTS_FILE="comments.json"
+        NEW_COMMENT=$(jq -n --arg body "${{ github.event.issue.body }}" --arg user "${{ github.event.issue.user.login }}" '{user: $user, comment: $body}')
+        jq ". += [${NEW_COMMENT}]" $COMMENTS_FILE > tmp.$$.json && mv tmp.$$.json $COMMENTS_FILE
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add comments.json
+        git commit -m "Update comments"
+        git push

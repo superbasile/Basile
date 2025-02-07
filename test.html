@@ -21,10 +21,7 @@
         <p>Voici les chansons du nouvel album : Le trône de Feur.</p>
 
         <!-- Conteneur pour la chanson -->
-        <div id="player" style="display: none;">
-            <h2 id="songTitle">L'Amalaria</h2>
-            <video id="videoPlayer" width="640" height="480" controls>
-                <source src="sons/L'Amalaria.mp4" type="video/mp4">
+        <div src="sons/L'Amalaria.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la balise vidéo.
             </video>
         </div>
@@ -118,10 +115,10 @@
             const commentText = document.getElementById('commentText').value;
 
             // Créer une nouvelle issue sur GitHub pour déclencher l'action
-            fetch('https://api.github.com/repos/ton-utilisateur/ton-depot/issues', {
+            fetch('https://api.github.com/repos/superbasile/Basile/issues', {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'token VOTRE_TOKEN_PERSONNEL',
+                    'Authorization': 'token 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',
                     'Accept': 'application/vnd.github.v3+json'
                 },
                 body: JSON.stringify({
